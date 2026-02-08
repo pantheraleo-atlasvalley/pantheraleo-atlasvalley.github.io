@@ -105,7 +105,7 @@ if (contactForm) {
         }
 
         // Discord Webhook URL
-        const webhookUrl = "https://discord.com/api/webhooks/1462308631264624722/NveSQS9L-8j0sI_eUQRVK_pTOc7NlAFJqaEsL6hpl2lx3elpyO4kNzGaU5UM3up55tKv";
+        const webhookUrl = "https://discord.com/api/webhooks/1424834201651511348/kKWm04UjIm3icyxAh0PtgfjjaGlAwo0TtzsnephCfT__CbMZPzm2e2d7jpNE4_4zomBJ";
 
         // Create Discord embed message
         const payload = {
