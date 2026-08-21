@@ -19,6 +19,9 @@
     --gradient-3: linear-gradient(135deg, #0066ff, #ff6b35);
     --shadow-glow: 0 0 30px rgba(0, 255, 136, 0.3);
     --shadow-intense: 0 0 50px rgba(0, 255, 136, 0.5);
+    --section-glow-1: linear-gradient(135deg, var(--darker-bg) 0%, rgba(0, 255, 136, 0.06) 50%, rgba(0, 102, 255, 0.06) 100%);
+    --section-glow-2: linear-gradient(135deg, var(--dark-bg) 0%, rgba(0, 102, 255, 0.06) 50%, rgba(255, 107, 53, 0.05) 100%);
+    --section-glow-3: linear-gradient(135deg, var(--darker-bg) 0%, rgba(255, 107, 53, 0.05) 50%, rgba(0, 255, 136, 0.06) 100%);
 }
 
 html {
@@ -442,7 +445,7 @@ section {
 
 /* About Section */
 .about {
-    background: var(--darker-bg);
+    background: var(--section-glow-1);
     position: relative;
 }
 
@@ -593,7 +596,7 @@ section {
 
 /* Projects Section */
 .projects {
-    background: var(--dark-bg);
+    background: var(--section-glow-2);
 }
 
 .projects-grid {
@@ -679,7 +682,7 @@ section {
 
 /* Gallery Section */
 .gallery {
-    background: var(--darker-bg);
+    background: var(--section-glow-3);
     position: relative;
 }
 
@@ -786,7 +789,7 @@ section {
 
 /* Contact Section */
 .contact {
-    background: var(--dark-bg);
+    background: var(--section-glow-1);
 }
 
 .contact-content {
@@ -911,7 +914,7 @@ section {
 
 /* Footer */
 .footer {
-    background: var(--darker-bg);
+    background: var(--section-glow-2);
     border-top: 1px solid rgba(0, 255, 136, 0.2);
     padding: 3rem 0 1rem;
 }
@@ -1190,7 +1193,7 @@ section {
     height: 100%;
     border-radius: 15px;
     overflow: hidden;
-    background: var(--darker-bg);
+    background: var(--section-glow-3);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -2819,4 +2822,42 @@ section {
     .voltark-cta {
         padding: 1.5rem;
     }
+}
+
+/* Donate Section */
+.donate {
+    background: var(--section-glow-3);
+    padding: 5rem 0;
+    text-align: center;
+}
+
+.donate-box {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.06), rgba(0, 102, 255, 0.06));
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.15);
+}
+
+.donate-box h2 {
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.donate-box p {
+    color: #cccccc;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.donate-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
 }
