@@ -68,13 +68,12 @@
     if (!address || app.hidden || inFlight || (!force && Date.now() - lastRefresh < 15000)) return;
     inFlight = true;
     const status = document.getElementById('walletMessage') || document.getElementById('walletStatusWallet');
-    if (!status) return;
-    status.textContent = 'Lettura SOL e token SPL da Solana mainnet…';
-    status.classList.remove('error');
+    if (status) {
+      status.textContent = 'Lettura SOL e token SPL da Solana mainnet…';
+      status.classList.remove('error');
+    }
     try {
-      const response = await fetch(`/api/wallet-assets?address=${encodeURIComponent(address)}`, {cache: 'no-store'});
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error || `HTTP ${response.status}`);
+      const data = await window.AtlasSolanaRpc.getWalletAssets(address);
       if (address !== data.address) return;
       render(data);
       lastRefresh = Date.now();

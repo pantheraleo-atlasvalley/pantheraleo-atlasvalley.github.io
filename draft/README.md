@@ -3,7 +3,7 @@
 - Sorgente attiva unica: `../atlaslabs/`.
 - Le versioni archiviate si conservano qui come ZIP; niente copie estratte delle vecchie app nella root.
 - Versione attiva: `AV01.000` (base applicativa v0.2.4).
-- Modifiche maggiori dall’ultima versione: **2 / 100** — (1) primo restyling e rimozione dei grafici dimostrativi; (2) nuova interfaccia VLT e tabella prezzi pubblici OKX.
+- Modifiche maggiori dall’ultima versione: **4 / 100** — (1) primo restyling e rimozione dei grafici dimostrativi; (2) nuova interfaccia VLT e tabella prezzi pubblici OKX; (3) passaggio dell’app a file statici HTML/CSS/JS, con letture dirette da Solana e OKX; (4) rimozione di Reown/AppKit e del toolchain npm, collegamento diretto a Phantom.
 - Alla modifica maggiore numero 100: creare un changelog breve, archiviare in ZIP l’intera app aggiornata in `draft/`, verificare l’archivio e solo dopo incrementare la versione, per esempio `AV01.001`.
 - Non incrementare la versione prima di aver salvato e verificato l’archivio e il changelog.
 

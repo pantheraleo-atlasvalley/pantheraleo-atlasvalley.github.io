@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#0b0e0c">
   <meta name="description" content="VLT by Atlas Valley — exchange e wallet Web3 in un’unica app.">
   <title>VLT · Atlas Valley</title>
-  <link rel="stylesheet" href="/atlas-polish.css">
+  <link rel="stylesheet" href="resources/css/atlas-polish.css">
 </head>
 <body>
   <section id="loginGate" class="login-gate">
@@ -31,14 +31,14 @@
       <section class="login-card">
         <div class="login-card-brand"><span class="card-logo">ϟ</span><span class="kicker">VLT · ACCESSO WALLET</span></div>
         <h2>Entra nel tuo Vault</h2>
-        <p id="loginStatus">Collega WalletConnect o Phantom per accedere.</p>
+        <p id="loginStatus">Collega Phantom per accedere.</p>
         <button class="login-button" id="loginButton" type="button"><span>LOGGA IN</span><span aria-hidden="true">↗</span></button>
         <div class="login-divider"><span></span><small>CONNESSIONE SICURA</small><span></span></div>
         <div class="login-assurance"><span>✓</span><p>Il login collega il wallet. Non condivide la chiave privata e non invia transazioni.</p></div>
-        <small class="login-note">WalletConnect · Phantom · Solana Mainnet</small>
+        <small class="login-note">PHANTOM · SOLANA MAINNET</small>
       </section>
     </main>
-    <footer class="login-footer"><span>VLT · ATLAS VALLEY</span><span>Produced by pantheraleo.atlasvalley</span><a href="/protocol.md" target="_blank" rel="noreferrer">Trasparenza ↗</a></footer>
+    <footer class="login-footer"><span>VLT · ATLAS VALLEY</span><span>Produced by pantheraleo.atlasvalley</span><a href="protocol.md" target="_blank" rel="noreferrer">Trasparenza ↗</a></footer>
   </section>
 
   <div id="walletApp" hidden>
@@ -156,15 +156,16 @@
           </div>
         </section>
 
-        <footer class="vault-footer"><span>VLT · AV01.000 · ATLAS VALLEY</span><span>Wallet read-only · Produced by pantheraleo.atlasvalley</span><a href="/protocol.md" target="_blank" rel="noreferrer">Stato integrazioni ↗</a></footer>
+        <footer class="vault-footer"><span>VLT · AV01.000 · ATLAS VALLEY</span><span>Wallet read-only · Produced by pantheraleo.atlasvalley</span><a href="protocol.md" target="_blank" rel="noreferrer">Stato integrazioni ↗</a></footer>
       </main>
     </div>
   </div>
 
-  <script src="/vault-ui.js" defer></script>
-  <script src="/wallet-assets.js" defer></script>
-  <script src="/market-data.js" defer></script>
-  <script src="/config.js"></script>
-  <script src="/wallet-app.bundle.js" defer></script>
+  <script src="resources/js/config.js" defer></script>
+  <script src="resources/js/solana-rpc.js" defer></script>
+  <script src="resources/js/vault-ui.js" defer></script>
+  <script src="resources/js/wallet-assets.js" defer></script>
+  <script src="resources/js/market-data.js" defer></script>
+  <script src="resources/js/main.js" defer></script>
 </body>
 </html>

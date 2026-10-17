@@ -17,9 +17,9 @@ Gli eventi vengono ordinati in una catena SHA-256. Ogni hash copre i campi `sequ
 
 La verifica rileva modifiche al registro che non aggiornino correttamente l'intera catena. Non è una prova pubblica né un ancoraggio blockchain: il proprietario del browser può modificare o cancellare `localStorage` e ricalcolare gli hash. I dati sono specifici di quel browser e non sono sincronizzati.
 
-## WalletConnect e limiti di autenticazione
+## Wallet e limiti di autenticazione
 
-Il percorso di login v0.2 è predisposto, ma il collegamento reale è disattivato finché non sono configurati un Project ID Reown e una rete per la sessione. La pagina non dichiara un utente autenticato, non chiede firme e non autorizza transazioni. Un'autenticazione di produzione richiede anche un servizio server-side che emetta nonce monouso, verifichi le firme e gestisca le sessioni.
+Questa pagina demo non richiede un wallet. Il link di accesso porta ad Atlas Vault, che può collegare direttamente l'estensione Phantom per visualizzare saldi pubblici. Il collegamento del wallet non è autenticazione server-side, non chiede firme e non autorizza transazioni. Un'autenticazione di produzione richiede un servizio server-side che emetta nonce monouso, verifichi le firme e gestisca le sessioni.
 
 ## Fondi reali non supportati
 

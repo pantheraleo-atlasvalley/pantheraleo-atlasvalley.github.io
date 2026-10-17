@@ -59,12 +59,40 @@
     updated.textContent = `Aggiornato ${time}`;
   }
 
+  async function getTicker(instrument) {
+    const url = new URL(window.ATLASLABS_CONFIG.okxTickerUrl);
+    url.searchParams.set('instId', instrument);
+    const response = await fetch(url, { cache: 'no-store' });
+    const payload = await response.json();
+    if (!response.ok || payload.code !== '0' || !payload.data?.[0]) {
+      throw new Error(payload.msg || `OKX HTTP ${response.status}`);
+    }
+    return payload.data[0];
+  }
+
   async function refresh() {
     try {
-      const response = await fetch('/api/market-summary', { cache: 'no-store' });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error || `HTTP ${response.status}`);
-      render(data);
+      const results = await Promise.allSettled(Object.keys(symbols).map(getTicker));
+      const markets = [];
+      const warnings = [];
+      results.forEach((result, index) => {
+        const instrument = Object.keys(symbols)[index];
+        if (result.status === 'rejected') {
+          warnings.push(`${instrument}: ${result.reason.message}`);
+          return;
+        }
+        const ticker = result.value;
+        markets.push({
+          instrument,
+          last: ticker.last,
+          high24h: ticker.high24h,
+          volume24h: Number(ticker.volCcy24h || 0),
+          change24hPct: Number(ticker.open24h) ? (Number(ticker.last) / Number(ticker.open24h) - 1) * 100 : NaN,
+        });
+      });
+      if (!markets.length) throw new Error(warnings.join('; ') || 'Nessun ticker disponibile');
+      render({ markets, fetchedAt: new Date().toISOString() });
+      if (warnings.length) updated.textContent += ' · feed parziale';
     } catch (error) {
       const message = document.createElement('tr');
       const status = document.createElement('td'); status.colSpan = 6;
