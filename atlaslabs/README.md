@@ -1,7 +1,7 @@
-# Atlas Valley Yield Lab v0.2
+# Atlas Valley Yield Lab v0.1
 
-Percorso GitHub Pages: `/atlaslabs/`; login: `/atlaslabs/login`.
+Versione statica HTML/CSS/JS della simulazione v0.1, pubblicata su `/atlaslabs/`. Non richiede Python, backend, database, login o wallet. Le unità DEMO e il registro hash-chain sono conservati nel `localStorage` di questo browser.
 
-Questa versione mantiene il registro DEMO nel browser e introduce il percorso grafico di accesso wallet. **WalletConnect non è ancora live**: in `config.js` mancano il Project ID Reown e la rete selezionata. Per un login effettivo occorre inoltre un servizio server-side per nonce monouso, verifica della firma e sessione. La connessione non va presentata come autenticazione sicura finché il backend non è pronto.
+Su GitHub Pages basta aprire il link Atlas Labs. Per un’anteprima locale, servire la cartella del repository con un qualsiasi server statico.
 
-La landing principale contiene il pulsante “Enter Yield Lab”. La specifica contabile e i limiti del registro sono in [protocol.md](protocol.md).
+La simulazione non usa asset reali, non invia transazioni e non calcola rendimenti. Consulta [protocol.md](protocol.md) per le regole contabili e i limiti della verifica.

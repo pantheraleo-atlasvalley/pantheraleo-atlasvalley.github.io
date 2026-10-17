@@ -7,3 +7,4 @@ Registro delle modifiche maggiori. Gli ZIP archiviati sono immutabili; se ne cre
 3. Conversione di COM in app statica HTML/CSS/JS con letture dirette dal browser.
 4. Rimozione di Reown/AppKit e del toolchain npm; il prototipo Vault usa il provider Phantom diretto.
 5. Ripristinata come app attiva la versione originale Atlas Valley Yield Lab v0.2 archiviata in `atlas-yield-lab-v0.2.zip`; `/atlaslabs/` e i link della landing aprono direttamente quella pagina.
+6. Sostituita la v0.2 attiva con l’interfaccia Atlas Valley Yield Lab v0.1; adattato il registro DEMO a `localStorage` per funzionare su GitHub Pages senza backend Python.
