@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b0e0c">
+  <meta name="description" content="VLT by Atlas Valley — exchange e wallet Web3 in un’unica app.">
+  <title>VLT · Atlas Valley</title>
+  <link rel="stylesheet" href="/atlas-polish.css">
+</head>
+<body>
+  <section id="loginGate" class="login-gate">
+    <header class="login-header">
+      <a class="brand" href="#" aria-label="Atlas Valley VLT">
+        <span class="brand-mark">ϟ</span>
+        <span><b>ATLAS VALLEY</b><small>VLT · AV01.000</small></span>
+      </a>
+      <span class="login-network"><i></i> SOLANA MAINNET</span>
+    </header>
+    <main class="login-main">
+      <section class="login-intro">
+        <div class="eyebrow"><span class="pulse"></span> ATLAS VALLEY · VLT</div>
+        <h1>Il tuo spazio<br>per gli asset digitali.</h1>
+        <p>Un’unica app per esplorare i mercati e gestire il tuo wallet Web3. Accedi con il tuo wallet per continuare.</p>
+        <div class="login-feature-row">
+          <article><span class="feature-mark">◈</span><b>Exchange</b><small>Mercati in tempo reale</small></article>
+          <article><span class="feature-mark">⌘</span><b>VLT Wallet</b><small>Asset on-chain</small></article>
+          <article><span class="feature-mark">↗</span><b>Non custodial</b><small>Le chiavi restano tue</small></article>
+        </div>
+      </section>
+      <section class="login-card">
+        <div class="login-card-brand"><span class="card-logo">ϟ</span><span class="kicker">VLT · ACCESSO WALLET</span></div>
+        <h2>Entra nel tuo Vault</h2>
+        <p id="loginStatus">Collega WalletConnect o Phantom per accedere.</p>
+        <button class="login-button" id="loginButton" type="button"><span>LOGGA IN</span><span aria-hidden="true">↗</span></button>
+        <div class="login-divider"><span></span><small>CONNESSIONE SICURA</small><span></span></div>
+        <div class="login-assurance"><span>✓</span><p>Il login collega il wallet. Non condivide la chiave privata e non invia transazioni.</p></div>
+        <small class="login-note">WalletConnect · Phantom · Solana Mainnet</small>
+      </section>
+    </main>
+    <footer class="login-footer"><span>VLT · ATLAS VALLEY</span><span>Produced by pantheraleo.atlasvalley</span><a href="/protocol.md" target="_blank" rel="noreferrer">Trasparenza ↗</a></footer>
+  </section>
+
+  <div id="walletApp" hidden>
+    <header class="vault-top">
+      <a class="brand" href="#" aria-label="Atlas Valley VLT home">
+        <span class="brand-mark">ϟ</span>
+        <span><b>ATLAS VALLEY</b><small>VLT · VAULT / AV01.000</small></span>
+      </a>
+      <div class="top-tools">
+        <span class="network"><i></i> SOLANA MAINNET</span>
+        <span class="wallet-pill"><span class="wallet-dot">A</span><code id="walletShort">Wallet</code></span>
+        <button id="logoutButton" class="quiet-button">ESCI</button>
+      </div>
+    </header>
+    <div class="app-shell">
+      <span id="solBalance" hidden>—</span>
+      <span id="solBalanceSecondary" hidden>—</span>
+      <aside class="sidebar">
+        <span class="side-label">WORKSPACE</span>
+        <button class="nav-item active" data-view="exchange"><span class="nav-icon">▥</span><span>Exchange</span><span class="nav-arrow">›</span></button>
+        <button class="nav-item" data-view="web3"><span class="nav-icon">⌘</span><span>VLT Wallet</span><span class="nav-arrow">›</span></button>
+        <div class="sidebar-caption">YOUR ACCOUNT</div>
+        <div class="sidebar-account"><span class="avatar">A</span><span><small>WALLET COLLEGATO</small><b id="walletSidebar">—</b></span></div>
+        <div class="side-bottom">
+          <div class="side-network"><i></i><span><b>Solana Mainnet</b><small>Connessione attiva</small></span></div>
+          <div class="mini-brand">VLT <span>BY ATLAS VALLEY</span></div>
+          <small>Produced by pantheraleo.atlasvalley</small>
+        </div>
+      </aside>
+
+      <main class="content-area">
+        <div class="welcome-row">
+          <div>
+            <div class="eyebrow"><span class="pulse"></span> VLT · DIGITAL ASSETS</div>
+            <h1 id="pageTitle">Exchange</h1>
+            <p>Mercati, strumenti e asset on-chain in un’unica interfaccia.</p>
+          </div>
+          <div class="account-chip"><span class="avatar">A</span><span><small>ACCOUNT</small><b id="walletAddress">—</b></span></div>
+          <span id="connectionBadge" hidden>COLLEGATO</span><span id="verified" hidden></span><span id="readStatus" hidden></span>
+        </div>
+
+        <section class="view active" id="view-exchange">
+          <section class="portfolio-hero">
+            <div class="portfolio-hero-copy">
+              <span class="overline">IL TUO WALLET · SOLANA</span>
+              <h2>Panoramica<br><em>del portafoglio.</em></h2>
+              <p>Saldi verificati direttamente su Solana mainnet.</p>
+              <div class="portfolio-metrics">
+                <div><small>SOL DISPONIBILI</small><strong id="solBalanceDisplay">—</strong></div>
+                <div><small>ASSET RILEVATI</small><strong id="assetCount">—</strong></div>
+              </div>
+            </div>
+            <div class="vault-art" aria-hidden="true"><div class="vault-ring ring-outer"></div><div class="vault-ring ring-inner"></div><div class="vault-orb">ϟ</div><span>VLT / 01</span></div>
+            <div class="hero-network"><i></i> LETTURA ON-CHAIN</div>
+          </section>
+
+          <div class="section-heading">
+            <div><span class="overline">MARKET</span><h2>Mercati</h2></div>
+            <div class="market-source"><span class="source-dot"></span><span>OKX · dati pubblici</span><small id="marketUpdated">Aggiornamento in attesa</small></div>
+          </div>
+          <section class="market-panel">
+            <div class="market-table-wrap">
+              <table class="market-table">
+                <thead><tr><th>ASSET</th><th>PREZZO</th><th>24H</th><th>MASSIMO 24H</th><th>VOLUME 24H</th><th></th></tr></thead>
+                <tbody id="marketTableBody"><tr><td colspan="6" class="market-loading"><span class="loader-dot"></span> Carico i prezzi spot da OKX…</td></tr></tbody>
+              </table>
+            </div>
+            <p class="market-footnote">Prezzi spot pubblici OKX in USDT. $ARKV viene mostrato nel wallet on-chain; non è quotato in questo feed.</p>
+          </section>
+
+          <div class="exchange-grid">
+            <section class="panel-card assets-card">
+              <div class="panel-heading">
+                <div><span class="overline">ASSET ON-CHAIN</span><h2>Il tuo portafoglio</h2></div>
+                <span class="live-dot"><i></i> MAINNET</span>
+              </div>
+              <div class="asset-table-labels"><span>ASSET / MINT</span><span>SALDO</span></div>
+              <div class="asset-list" id="assetListExchange" aria-live="polite"><p class="portfolio-note">Attendo i saldi on-chain…</p></div>
+              <div class="asset-card-footer"><p class="portfolio-note" id="walletMessage">Lettura saldo in corso…</p><button class="text-button refresh-button" id="refreshWallet">Aggiorna ↻</button></div>
+            </section>
+
+            <section class="panel-card trade-card">
+              <div class="panel-heading"><div><span class="overline">VLT EXCHANGE</span><h2>Scambia asset</h2></div><span class="soon-pill">IN PREPARAZIONE</span></div>
+              <div class="trade-preview-icon">⇅</div>
+              <p class="trade-intro">L’interfaccia di trading si collegherà a un provider di liquidità verificato.</p>
+              <div class="trade-row"><span>Paghi</span><b>Seleziona un asset <i>⌄</i></b></div>
+              <div class="trade-row"><span>Ricevi</span><b>Seleziona un asset <i>⌄</i></b></div>
+              <button class="trade-disabled" disabled>Trading non ancora attivo <span>↗</span></button>
+              <small class="trade-caption">Nessuna transazione verrà inviata da questa preview.</small>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="view-web3">
+          <div class="wallet-heading-card">
+            <div><span class="overline">VLT WALLET · SELF-CUSTODY</span><h2>Il tuo wallet,<br><em>la tua scelta.</em></h2><p>Visualizza gli asset del wallet collegato e usa le dApp Web3 da un solo spazio.</p></div>
+            <div class="wallet-heading-mark">ϟ<span>VLT WALLET</span></div>
+          </div>
+          <div class="wallet-stats-grid">
+            <article class="stat-card"><span class="stat-icon sol">◎</span><small>SALDO SOL</small><strong id="solBalanceWallet">—</strong><span>Solana Mainnet</span></article>
+            <article class="stat-card"><span class="stat-icon">◈</span><small>ASSET RILEVATI</small><strong id="assetCountWallet">—</strong><span>Token con saldo on-chain</span></article>
+            <article class="stat-card"><span class="stat-icon secure">✓</span><small>MODALITÀ</small><strong>Sola lettura</strong><span>Nessuna chiave custodita</span></article>
+          </div>
+          <div class="wallet-page-grid">
+            <section class="panel-card assets-card">
+              <div class="panel-heading"><div><span class="overline">ON-CHAIN · SOLANA</span><h2>I tuoi asset</h2></div><button class="text-button refresh-button" id="refreshWalletPage">Aggiorna ↻</button></div>
+              <div class="asset-table-labels"><span>ASSET / MINT</span><span>SALDO</span></div>
+              <div class="asset-list" id="assetListWallet" aria-live="polite"><p class="portfolio-note">Attendo i saldi on-chain…</p></div>
+              <p class="portfolio-note" id="walletStatusWallet">I saldi sono letti direttamente da Solana mainnet.</p>
+            </section>
+            <aside class="wallet-info-column">
+              <section class="wallet-info-card"><span class="info-icon">⌘</span><span class="overline">WEB3 EXPERIENCE</span><h3>Un accesso, più possibilità.</h3><p>Collega applicazioni decentralizzate e protocolli dalla tua esperienza VLT.</p><span class="coming-label">CONNETTORI WEB3 IN ARRIVO</span></section>
+              <section class="security-card"><span class="security-check">✓</span><div><b>Il wallet resta tuo</b><p>VLT non vede né conserva la tua chiave privata. La connessione è gestita dal provider del wallet.</p></div></section>
+            </aside>
+          </div>
+        </section>
+
+        <footer class="vault-footer"><span>VLT · AV01.000 · ATLAS VALLEY</span><span>Wallet read-only · Produced by pantheraleo.atlasvalley</span><a href="/protocol.md" target="_blank" rel="noreferrer">Stato integrazioni ↗</a></footer>
+      </main>
+    </div>
+  </div>
+
+  <script src="/vault-ui.js" defer></script>
+  <script src="/wallet-assets.js" defer></script>
+  <script src="/market-data.js" defer></script>
+  <script src="/config.js"></script>
+  <script src="/wallet-app.bundle.js" defer></script>
+</body>
+</html>

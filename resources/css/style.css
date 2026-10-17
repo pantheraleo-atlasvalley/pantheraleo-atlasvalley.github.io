@@ -2861,3 +2861,104 @@ section {
     padding: 1rem 2.5rem;
     font-size: 1.1rem;
 }
+
+/* Atlas Vault hero signature */
+.atlaslabs-entry {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 1.25rem;
+    width: min(100%, 490px);
+    margin-top: 1.5rem;
+    padding: 1.05rem 1.15rem;
+    border: 1px solid rgba(0, 255, 178, 0.35);
+    border-radius: 18px;
+    background: linear-gradient(115deg, rgba(0, 255, 136, 0.11), rgba(0, 102, 255, 0.09) 70%, rgba(4, 12, 22, 0.7));
+    box-shadow: 0 0 28px rgba(0, 255, 136, 0.12), inset 0 1px rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+}
+
+.vault-signature {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    min-width: 0;
+}
+
+.entry-mark {
+    display: grid;
+    place-items: center;
+    flex: 0 0 46px;
+    width: 46px;
+    height: 46px;
+    border: 1px solid rgba(0, 255, 178, 0.56);
+    border-radius: 14px;
+    color: #caffef;
+    background: linear-gradient(145deg, rgba(0, 255, 136, 0.27), rgba(0, 102, 255, 0.24));
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.25);
+    font: 700 1.7rem/1 "Orbitron", sans-serif;
+    text-shadow: 0 0 12px rgba(0, 255, 178, 0.9);
+}
+
+.vault-wordmark {
+    display: grid;
+    gap: 0.12rem;
+    min-width: 0;
+}
+
+.vault-wordmark small,
+.vault-wordmark em {
+    color: rgba(196, 231, 222, 0.68);
+    font: 500 0.62rem/1.4 "Source Code Pro", monospace;
+    letter-spacing: 0.1em;
+    font-style: normal;
+}
+
+.vault-wordmark b {
+    color: #effff9;
+    font: 700 1.02rem/1.25 "Orbitron", sans-serif;
+    letter-spacing: 0.08em;
+    text-shadow: 0 0 18px rgba(0, 255, 178, 0.42);
+}
+
+.vault-wordmark em i {
+    color: var(--primary-color);
+    font-style: normal;
+}
+
+.atlaslabs-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid rgba(0, 255, 178, 0.6);
+    border-radius: 12px;
+    color: #caffef;
+    background: rgba(0, 12, 17, 0.45);
+    font: 600 0.65rem/1.2 "Source Code Pro", monospace;
+    letter-spacing: 0.07em;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: 0.25s ease;
+}
+
+.atlaslabs-button:hover {
+    color: #04110d;
+    background: #00ffb2;
+    box-shadow: 0 0 24px rgba(0, 255, 178, 0.5);
+    transform: translateY(-2px);
+}
+
+.entry-arrow {
+    font-size: 1rem;
+}
+
+@media (max-width: 480px) {
+    .atlaslabs-entry {
+        grid-template-columns: 1fr;
+    }
+
+    .atlaslabs-button {
+        justify-content: center;
+    }
+}
