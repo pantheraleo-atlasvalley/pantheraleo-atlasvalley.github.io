@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#07110c">
   <meta name="description" content="Atlas Valley Yield Lab v0.1.1 — connessione Phantom e lettura dei saldi Solana on-chain.">
   <title>Yield Lab v0.1.1 — Atlas Valley</title>
-  <link rel="stylesheet" href="/atlaslabs/style.css?v=0.1.1">
+  <link rel="stylesheet" href="/atlaslabs/style.css?v=0.1.1.3">
 </head>
 <body>
   <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
@@ -37,10 +37,10 @@
       <aside class="connect-card glass" id="connectCard">
         <div class="connect-orbit"><span>ϟ</span><i></i><i></i><i></i></div>
         <div class="card-kicker">CONNESSIONE WALLET</div>
-        <h2 id="connectTitle">Il tuo wallet,<br>senza passaggi superflui.</h2>
-        <p id="connectDescription">Autorizza Phantom a condividere il tuo indirizzo pubblico. Non serve firmare messaggi.</p>
-        <button class="primary-button" id="connectButton" type="button"><span>Collega Phantom</span><b>↗</b></button>
-        <div class="security-line"><span>◇</span> Connessione pubblica · nessuna transazione</div>
+        <h2 id="connectTitle">Uno sguardo chiaro<br>al tuo wallet.</h2>
+        <p id="connectDescription">✨ Collega Phantom per vedere il saldo SOL, $ARKV e gli altri token presenti. Leggiamo solo l’indirizzo pubblico: niente firme né transazioni.</p>
+        <button class="primary-button" id="connectButton" type="button"><span>Connetti Phantom</span><b>↗</b></button>
+        <div class="security-line"><span>🛡️</span> Solo lettura · le chiavi restano in Phantom</div>
         <p class="connect-message" id="connectMessage" aria-live="polite"></p>
       </aside>
     </section>
@@ -48,8 +48,15 @@
     <section class="portfolio" aria-labelledby="portfolioTitle">
       <div class="section-heading">
         <div><span class="kicker">01 / PORTAFOGLIO</span><h2 id="portfolioTitle">Asset on-chain</h2><p id="portfolioDescription">Connetti Phantom per caricare i saldi aggiornati.</p></div>
-        <div class="live-status" id="liveStatus"><span></span><b>WALLET NON CONNESSO</b></div>
+        <div class="portfolio-actions"><div class="live-status" id="liveStatus"><span></span><b>WALLET NON CONNESSO</b></div><button class="rpc-toggle" id="rpcToggle" type="button" aria-expanded="false" aria-controls="rpcSettings">Impostazioni RPC</button></div>
       </div>
+      <form class="rpc-settings glass" id="rpcSettings" hidden>
+        <div><b>Endpoint Solana mainnet</b><p>L’RPC pubblico può limitare le richieste. Inserisci un endpoint compatibile con getBalance e getTokenAccountsByOwner da un provider di cui ti fidi.</p></div>
+        <label class="sr-only" for="rpcEndpoint">URL endpoint RPC</label>
+        <input id="rpcEndpoint" type="url" inputmode="url" placeholder="https://…" autocomplete="url" spellcheck="false">
+        <div class="rpc-controls"><button class="rpc-save" type="submit">Salva e aggiorna</button><button class="rpc-reset" id="rpcReset" type="button">Usa endpoint predefinito</button></div>
+        <small>Salvato solo in questo browser; la richiesta include l’indirizzo pubblico del wallet. Se l’URL contiene una chiave API, limita la chiave al dominio GitHub Pages nelle impostazioni del provider.</small>
+      </form>
       <div class="portfolio-overview glass">
         <div class="overview-label">SALDO SOLANA</div>
         <div class="overview-value"><strong id="solBalance">—</strong><span>SOL</span></div>
@@ -71,8 +78,8 @@
       </div>
     </section>
 
-    <footer><a class="footer-brand" href="#top">ATLAS VALLEY <span>YIELD LAB V0.1.1</span></a><p>Wallet non custodial · saldo letto dalla rete · nessuna transazione inviata</p><a href="/atlaslabs/protocol.md" target="_blank" rel="noreferrer">Protocollo ↗</a></footer>
+    <footer><a class="footer-brand" href="#top">ATLAS VALLEY <span>YIELD LAB V0.1.1</span></a><p>Wallet non custodial · dati pubblici on-chain · nessuna transazione inviata</p><span class="producer">Produced by pantheraleo.atlasvalley</span><a href="/atlaslabs/protocol.md" target="_blank" rel="noreferrer">Protocollo ↗</a></footer>
   </main>
-  <script src="/atlaslabs/app.js?v=0.1.1" defer></script>
+  <script src="/atlaslabs/app.js?v=0.1.1.3" defer></script>
 </body>
 </html>

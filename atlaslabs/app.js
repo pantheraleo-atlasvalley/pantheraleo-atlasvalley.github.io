@@ -1,4 +1,5 @@
-const RPC_URL = 'https://api.mainnet-beta.solana.com';
+const DEFAULT_RPC_URL = 'https://api.mainnet-beta.solana.com';
+const RPC_STORAGE_KEY = 'atlas-yield-lab-rpc-url';
 const TOKEN_PROGRAMS = [
   'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
   'TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb',
@@ -12,11 +13,17 @@ const elements = {
   connectDescription: $('#connectDescription'), connectMessage: $('#connectMessage'), liveStatus: $('#liveStatus'),
   portfolioDescription: $('#portfolioDescription'), solBalance: $('#solBalance'), walletAddress: $('#walletAddress'),
   explorerLink: $('#explorerLink'), assetCount: $('#assetCount'), assetList: $('#assetList'), lastUpdated: $('#lastUpdated'),
+  rpcToggle: $('#rpcToggle'), rpcSettings: $('#rpcSettings'), rpcEndpoint: $('#rpcEndpoint'), rpcReset: $('#rpcReset'),
 };
 
 let provider = null;
 let publicKey = null;
 let requestId = 0;
+
+function getRpcUrl() {
+  try { return localStorage.getItem(RPC_STORAGE_KEY) || DEFAULT_RPC_URL; }
+  catch { return DEFAULT_RPC_URL; }
+}
 
 function getProvider() {
   const phantom = window.phantom?.solana;
@@ -40,14 +47,26 @@ function formatUnits(raw, decimals, maxDecimals = 6) {
 }
 
 async function rpc(method, params) {
-  const response = await fetch(RPC_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ jsonrpc: '2.0', id: ++requestId, method, params }),
-  });
-  if (!response.ok) throw new Error(`RPC Solana non disponibile (HTTP ${response.status}). Riprova tra poco.`);
-  const data = await response.json();
-  if (data.error) throw new Error(data.error.message || 'La rete Solana ha restituito un errore.');
+  let response;
+  try {
+    response = await fetch(getRpcUrl(), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ jsonrpc: '2.0', id: ++requestId, method, params }),
+    });
+  } catch {
+    throw new Error('Connessione RPC bloccata o non raggiungibile. Controlla endpoint e permessi CORS del provider.');
+  }
+  if (!response.ok) {
+    if (response.status === 403 || response.status === 429) {
+      throw new Error(`Il nodo RPC ha rifiutato la richiesta (HTTP ${response.status}). Apri “Impostazioni RPC” e inserisci un endpoint Solana mainnet con accesso dal browser.`);
+    }
+    throw new Error(`Il nodo RPC ha risposto con HTTP ${response.status}. Verifica l’endpoint e riprova.`);
+  }
+  let data;
+  try { data = await response.json(); }
+  catch { throw new Error('Il provider RPC non ha restituito una risposta JSON valida.'); }
+  if (data.error) throw new Error(data.error.message || 'La rete Solana ha restituito un errore RPC.');
   return data.result;
 }
 
@@ -64,8 +83,8 @@ function setDisconnected() {
   elements.walletButton.classList.remove('connected');
   elements.dropdownAddress.textContent = 'Non connesso';
   elements.disconnectButton.hidden = true;
-  elements.connectTitle.innerHTML = 'Il tuo wallet,<br>senza passaggi superflui.';
-  elements.connectDescription.textContent = 'Autorizza Phantom a condividere il tuo indirizzo pubblico. Non serve firmare messaggi.';
+  elements.connectTitle.innerHTML = 'Uno sguardo chiaro<br>al tuo wallet.';
+  elements.connectDescription.textContent = '✨ Collega Phantom per vedere il saldo SOL, $ARKV e gli altri token presenti. Leggiamo solo l’indirizzo pubblico: niente firme né transazioni.';
   elements.connectButton.hidden = false;
   elements.connectMessage.textContent = '';
   elements.solBalance.textContent = '—';
@@ -81,20 +100,20 @@ function setDisconnected() {
 async function connectWallet() {
   provider = getProvider();
   if (!provider) {
-    elements.connectMessage.innerHTML = 'Phantom non rilevato. Installa l’estensione o apri questa pagina nel browser Phantom.';
+    elements.connectMessage.textContent = '👻 Phantom non rilevato. Installa l’estensione o apri la pagina nel browser Phantom.';
     elements.connectMessage.classList.add('warning');
     return;
   }
   elements.connectButton.disabled = true;
   elements.connectMessage.classList.remove('warning');
-  elements.connectMessage.textContent = 'Attendi la conferma in Phantom…';
+  elements.connectMessage.textContent = '🔐 Conferma la connessione nel popup Phantom…';
   try {
     const result = await provider.connect();
     publicKey = result.publicKey.toString();
     showConnected();
     await refreshBalances();
   } catch (error) {
-    elements.connectMessage.textContent = error?.code === 4001 ? 'Connessione rifiutata in Phantom.' : (error.message || 'Connessione non riuscita.');
+    elements.connectMessage.textContent = error?.code === 4001 ? 'Connessione annullata: il wallet non è stato modificato.' : (error.message || 'Connessione non riuscita.');
   } finally {
     elements.connectButton.disabled = false;
   }
@@ -106,8 +125,8 @@ function showConnected() {
   elements.walletButton.classList.add('connected');
   elements.dropdownAddress.textContent = publicKey;
   elements.disconnectButton.hidden = false;
-  elements.connectTitle.textContent = 'Wallet collegato.';
-  elements.connectDescription.textContent = 'Indirizzo pubblico rilevato. Ora puoi controllare i saldi letti dalla mainnet.';
+  elements.connectTitle.textContent = 'Wallet collegato ✨';
+  elements.connectDescription.textContent = 'Il saldo SOL e i token sono letti dalla mainnet. Le chiavi restano in Phantom e questa pagina non invia transazioni.';
   elements.connectButton.hidden = true;
   elements.connectMessage.textContent = '';
   elements.walletAddress.textContent = publicKey;
@@ -124,12 +143,20 @@ async function refreshBalances() {
   elements.refreshButton.classList.add('loading');
   setStatus('LETTURA MAINNET…', 'loading');
   try {
-    const [native, tokenResults] = await Promise.all([
-      rpc('getBalance', [owner, { commitment: 'confirmed' }]),
-      Promise.all(TOKEN_PROGRAMS.map((programId) => rpc('getTokenAccountsByOwner', [owner, { programId }, { encoding: 'jsonParsed', commitment: 'confirmed' }]))),
-    ]);
+    const native = await rpc('getBalance', [owner, { commitment: 'confirmed' }]);
     if (owner !== publicKey) return;
     elements.solBalance.textContent = formatUnits(String(native.value), 9, 6);
+    const tokenReads = await Promise.allSettled(TOKEN_PROGRAMS.map((programId) => rpc('getTokenAccountsByOwner', [owner, { programId }, { encoding: 'jsonParsed', commitment: 'confirmed' }])));
+    if (owner !== publicKey) return;
+    const tokenResults = tokenReads.filter((result) => result.status === 'fulfilled').map((result) => result.value);
+    const tokenErrors = tokenReads.filter((result) => result.status === 'rejected');
+    if (!tokenResults.length) {
+      const message = tokenErrors[0]?.reason?.message || 'Il nodo RPC non ha restituito i token SPL.';
+      elements.lastUpdated.textContent = 'Saldo SOL aggiornato · token non disponibili';
+      elements.assetList.innerHTML = `<div class="empty-state error-state"><b>SOL aggiornato; token SPL non leggibili</b><span>${safe(message)}</span></div>`;
+      setStatus('TOKEN SPL NON DISPONIBILI', 'error');
+      return;
+    }
     const tokenMap = new Map();
     for (const result of tokenResults) {
       for (const account of result.value || []) {
@@ -143,10 +170,12 @@ async function refreshBalances() {
     }
     const tokens = [...tokenMap.values()].sort((a, b) => a.mint === ARKV_MINT ? -1 : b.mint === ARKV_MINT ? 1 : a.mint.localeCompare(b.mint));
     renderTokens(tokens);
-    elements.lastUpdated.textContent = `Aggiornato alle ${new Intl.DateTimeFormat('it-IT', { timeStyle: 'medium' }).format(new Date())}`;
-    setStatus('DATI LIVE · MAINNET', 'online');
+    const updatedAt = `Aggiornato alle ${new Intl.DateTimeFormat('it-IT', { timeStyle: 'medium' }).format(new Date())}`;
+    elements.lastUpdated.textContent = tokenErrors.length ? `${updatedAt} · lettura token parziale` : updatedAt;
+    setStatus(tokenErrors.length ? 'LETTURA PARZIALE' : 'DATI LIVE · MAINNET', tokenErrors.length ? 'loading' : 'online');
   } catch (error) {
     setStatus('ERRORE DI LETTURA', 'error');
+    elements.lastUpdated.textContent = 'Lettura mainnet non riuscita';
     elements.assetList.innerHTML = `<div class="empty-state error-state"><b>Non riesco a leggere i saldi</b><span>${safe(error.message)}</span></div>`;
   } finally {
     elements.refreshButton.disabled = false;
@@ -177,6 +206,39 @@ elements.walletButton.addEventListener('click', async () => {
   elements.walletButton.setAttribute('aria-expanded', String(!isOpen));
 });
 elements.refreshButton.addEventListener('click', refreshBalances);
+elements.rpcEndpoint.value = getRpcUrl();
+elements.rpcToggle.addEventListener('click', () => {
+  const open = elements.rpcSettings.hidden;
+  elements.rpcSettings.hidden = !open;
+  elements.rpcToggle.setAttribute('aria-expanded', String(open));
+  if (open) elements.rpcEndpoint.focus();
+});
+elements.rpcSettings.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  let url;
+  try { url = new URL(elements.rpcEndpoint.value.trim()); }
+  catch { elements.rpcEndpoint.setCustomValidity('Inserisci un URL valido.'); elements.rpcEndpoint.reportValidity(); return; }
+  if (url.protocol !== 'https:') {
+    elements.rpcEndpoint.setCustomValidity('Per GitHub Pages è necessario un endpoint HTTPS.');
+    elements.rpcEndpoint.reportValidity();
+    return;
+  }
+  elements.rpcEndpoint.setCustomValidity('');
+  try { localStorage.setItem(RPC_STORAGE_KEY, url.href); }
+  catch {
+    elements.assetList.innerHTML = '<div class="empty-state error-state"><b>Impossibile salvare l’endpoint</b><span>Il browser ha bloccato l’archiviazione locale. Controlla le impostazioni di privacy del sito.</span></div>';
+    return;
+  }
+  elements.rpcSettings.hidden = true;
+  elements.rpcToggle.setAttribute('aria-expanded', 'false');
+  if (publicKey) await refreshBalances();
+});
+elements.rpcEndpoint.addEventListener('input', () => elements.rpcEndpoint.setCustomValidity(''));
+elements.rpcReset.addEventListener('click', async () => {
+  try { localStorage.removeItem(RPC_STORAGE_KEY); } catch { /* use the default for this page load */ }
+  elements.rpcEndpoint.value = DEFAULT_RPC_URL;
+  if (publicKey) await refreshBalances();
+});
 elements.disconnectButton.addEventListener('click', async () => {
   try { await provider?.disconnect(); } finally {
     elements.dropdown.hidden = true;
