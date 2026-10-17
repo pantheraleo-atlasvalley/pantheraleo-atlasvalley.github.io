@@ -1,4 +1,7 @@
-const DEFAULT_RPC_URL = 'https://api.mainnet-beta.solana.com';
+const LOCAL_HOSTS = new Set(['localhost', '127.0.0.1']);
+const RPC_PROXY_URL = window.ATLAS_RPC_PROXY_URL ||
+  (LOCAL_HOSTS.has(location.hostname) || location.hostname.endsWith('.onrender.com') ? '/api/rpc' : '');
+const DEFAULT_RPC_URL = RPC_PROXY_URL || 'https://api.mainnet-beta.solana.com';
 const RPC_STORAGE_KEY = 'atlas-yield-lab-rpc-url';
 const TOKEN_PROGRAMS = [
   'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
@@ -21,6 +24,8 @@ let publicKey = null;
 let requestId = 0;
 
 function getRpcUrl() {
+  // A configured proxy takes precedence so a stale manual RPC URL cannot bypass it.
+  if (RPC_PROXY_URL) return RPC_PROXY_URL;
   try { return localStorage.getItem(RPC_STORAGE_KEY) || DEFAULT_RPC_URL; }
   catch { return DEFAULT_RPC_URL; }
 }
@@ -216,10 +221,10 @@ elements.rpcToggle.addEventListener('click', () => {
 elements.rpcSettings.addEventListener('submit', async (event) => {
   event.preventDefault();
   let url;
-  try { url = new URL(elements.rpcEndpoint.value.trim()); }
+  try { url = new URL(elements.rpcEndpoint.value.trim(), location.origin); }
   catch { elements.rpcEndpoint.setCustomValidity('Inserisci un URL valido.'); elements.rpcEndpoint.reportValidity(); return; }
-  if (url.protocol !== 'https:') {
-    elements.rpcEndpoint.setCustomValidity('Per GitHub Pages è necessario un endpoint HTTPS.');
+  if (url.protocol !== 'https:' && !(url.origin === location.origin && LOCAL_HOSTS.has(location.hostname))) {
+    elements.rpcEndpoint.setCustomValidity('Usa un endpoint HTTPS, oppure il proxy locale sulla stessa origine.');
     elements.rpcEndpoint.reportValidity();
     return;
   }

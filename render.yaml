@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: atlas-valley-yield-rpc
+    runtime: python
+    plan: free
+    buildCommand: python -m py_compile atlaslabs/backend/server.py
+    startCommand: python3 atlaslabs/backend/server.py
+    envVars:
+      - key: HELIUS_API_KEY
+        sync: false
+      - key: ALLOWED_ORIGINS
+        value: https://pantheraleo-atlasvalley.github.io

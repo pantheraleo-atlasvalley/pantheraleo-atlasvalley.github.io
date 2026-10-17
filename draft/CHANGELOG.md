@@ -11,3 +11,4 @@ Registro delle modifiche maggiori. Gli ZIP archiviati sono immutabili; se ne cre
 7. Rilasciata la v0.1.1: connessione Phantom, lettura live di SOL e token SPL/Token-2022, aggiornamento saldi e restyling con pannelli glass, menu luminosi e layout responsive. Nessuna firma o transazione.
 8. Corretto il caricamento della v0.1.1 aggiungendo una query di versione a CSS e JavaScript, per evitare che browser con cache persistente usino gli asset della vecchia simulazione.
 9. Migliorata la sezione 01: un errore Token-2022 non blocca gli altri saldi, gli errori RPC spiegano come risolvere HTTP 403/429 e si può configurare dal browser un endpoint HTTPS Solana mainnet.
+10. Aggiunto un proxy backend Python per l’RPC Solana: la chiave provider resta sul server, le chiamate sono limitate alle letture del wallet e l’app seleziona il proxy automaticamente in locale. Aggiunti blueprint Render e istruzioni; nessuno ZIP è stato modificato.

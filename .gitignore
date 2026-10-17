@@ -1,0 +1,4 @@
+# Local provider credentials and Python runtime files
+atlaslabs/backend/.env.local
+__pycache__/
+*.py[cod]
