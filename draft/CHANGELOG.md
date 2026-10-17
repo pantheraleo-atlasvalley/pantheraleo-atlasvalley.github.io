@@ -1,0 +1,9 @@
+# Changelog AV01.000
+
+Registro delle modifiche maggiori. Gli ZIP archiviati sono immutabili; se ne crea uno nuovo solo al raggiungimento di 100 modifiche maggiori.
+
+1. Restyling iniziale e rimozione dei grafici dimostrativi.
+2. Nuova interfaccia VLT con dati di mercato pubblici OKX.
+3. Conversione di COM in app statica HTML/CSS/JS con letture dirette dal browser.
+4. Rimozione di Reown/AppKit e del toolchain npm; il prototipo Vault usa il provider Phantom diretto.
+5. Ripristinata come app attiva la versione originale Atlas Valley Yield Lab v0.2 archiviata in `atlas-yield-lab-v0.2.zip`; `/atlaslabs/` e i link della landing aprono direttamente quella pagina.

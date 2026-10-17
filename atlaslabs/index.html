@@ -1,171 +1,69 @@
 <!doctype html>
 <html lang="it">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#0b0e0c">
-  <meta name="description" content="VLT by Atlas Valley — exchange e wallet Web3 in un’unica app.">
-  <title>VLT · Atlas Valley</title>
-  <link rel="stylesheet" href="resources/css/atlas-polish.css">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#07110c"><meta name="description" content="Atlas Valley Yield Lab v0.2 — simulatore locale trasparente, login wallet in preparazione.">
+  <title>Yield Lab v0.2 — Atlas Valley</title><link rel="stylesheet" href="/atlaslabs/dashboard.css"><link rel="stylesheet" href="/atlaslabs/dashboard-v02.css">
 </head>
 <body>
-  <section id="loginGate" class="login-gate">
-    <header class="login-header">
-      <a class="brand" href="#" aria-label="Atlas Valley VLT">
-        <span class="brand-mark">ϟ</span>
-        <span><b>ATLAS VALLEY</b><small>VLT · AV01.000</small></span>
-      </a>
-      <span class="login-network"><i></i> SOLANA MAINNET</span>
-    </header>
-    <main class="login-main">
-      <section class="login-intro">
-        <div class="eyebrow"><span class="pulse"></span> ATLAS VALLEY · VLT</div>
-        <h1>Il tuo spazio<br>per gli asset digitali.</h1>
-        <p>Un’unica app per esplorare i mercati e gestire il tuo wallet Web3. Accedi con il tuo wallet per continuare.</p>
-        <div class="login-feature-row">
-          <article><span class="feature-mark">◈</span><b>Exchange</b><small>Mercati in tempo reale</small></article>
-          <article><span class="feature-mark">⌘</span><b>VLT Wallet</b><small>Asset on-chain</small></article>
-          <article><span class="feature-mark">↗</span><b>Non custodial</b><small>Le chiavi restano tue</small></article>
-        </div>
-      </section>
-      <section class="login-card">
-        <div class="login-card-brand"><span class="card-logo">ϟ</span><span class="kicker">VLT · ACCESSO WALLET</span></div>
-        <h2>Entra nel tuo Vault</h2>
-        <p id="loginStatus">Collega Phantom per accedere.</p>
-        <button class="login-button" id="loginButton" type="button"><span>LOGGA IN</span><span aria-hidden="true">↗</span></button>
-        <div class="login-divider"><span></span><small>CONNESSIONE SICURA</small><span></span></div>
-        <div class="login-assurance"><span>✓</span><p>Il login collega il wallet. Non condivide la chiave privata e non invia transazioni.</p></div>
-        <small class="login-note">PHANTOM · SOLANA MAINNET</small>
-      </section>
-    </main>
-    <footer class="login-footer"><span>VLT · ATLAS VALLEY</span><span>Produced by pantheraleo.atlasvalley</span><a href="protocol.md" target="_blank" rel="noreferrer">Trasparenza ↗</a></footer>
-  </section>
-
-  <div id="walletApp" hidden>
-    <header class="vault-top">
-      <a class="brand" href="#" aria-label="Atlas Valley VLT home">
-        <span class="brand-mark">ϟ</span>
-        <span><b>ATLAS VALLEY</b><small>VLT · VAULT / AV01.000</small></span>
-      </a>
-      <div class="top-tools">
-        <span class="network"><i></i> SOLANA MAINNET</span>
-        <span class="wallet-pill"><span class="wallet-dot">A</span><code id="walletShort">Wallet</code></span>
-        <button id="logoutButton" class="quiet-button">ESCI</button>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Atlas Valley Yield Lab"><span class="brand-mark">ϟ</span><span><b>ATLAS VALLEY</b><small>YIELD LAB / V0.2</small></span></a>
+    <div class="top-right"><span class="network"><i></i> AMBIENTE DEMO</span><a class="mode-tag wallet-entry" href="/atlaslabs/login">ACCEDI CON WALLET ↗</a></div>
+  </header>
+  <main id="top">
+    <section class="intro">
+      <div><div class="eyebrow"><span class="pulse"></span> PROTOTIPO TRASPARENTE · FASE 01</div>
+        <h1>Il rendimento,<br><em>senza scatole nere.</em></h1>
+        <p class="lead">Un laboratorio web per esplorare deposito, allocazione e prelievo simulati. Login wallet in preparazione; i passaggi demo restano trasparenti e verificabili nel browser.</p>
       </div>
-    </header>
-    <div class="app-shell">
-      <span id="solBalance" hidden>—</span>
-      <span id="solBalanceSecondary" hidden>—</span>
-      <aside class="sidebar">
-        <span class="side-label">WORKSPACE</span>
-        <button class="nav-item active" data-view="exchange"><span class="nav-icon">▥</span><span>Exchange</span><span class="nav-arrow">›</span></button>
-        <button class="nav-item" data-view="web3"><span class="nav-icon">⌘</span><span>VLT Wallet</span><span class="nav-arrow">›</span></button>
-        <div class="sidebar-caption">YOUR ACCOUNT</div>
-        <div class="sidebar-account"><span class="avatar">A</span><span><small>WALLET COLLEGATO</small><b id="walletSidebar">—</b></span></div>
-        <div class="side-bottom">
-          <div class="side-network"><i></i><span><b>Solana Mainnet</b><small>Connessione attiva</small></span></div>
-          <div class="mini-brand">VLT <span>BY ATLAS VALLEY</span></div>
-          <small>Produced by pantheraleo.atlasvalley</small>
+      <aside class="reality-card"><span class="reality-icon">ⓘ</span><div><b>Qui non si muovono criptovalute</b><p>Questa v0.2 simula i flussi usando unità DEMO nel browser. Il wallet non è ancora collegato; non ci sono fondi, validator o rendimenti reali.</p></div></aside>
+    </section>
+
+    <section class="portfolio" aria-labelledby="portfolio-title">
+      <div class="section-heading"><div><span class="kicker">01 / POSIZIONE</span><h2 id="portfolio-title">Panoramica del portafoglio</h2></div><span class="sync"><i></i> Registro aggiornato</span></div>
+      <div class="balance-grid">
+        <article class="balance-card main-balance"><div class="card-top"><span>Disponibile</span><span class="coin">D</span></div><div class="amount"><strong id="available">—</strong><small>DEMO</small></div><div class="card-foot"><span>Pronto per una simulazione</span><span class="up">↗</span></div></article>
+        <article class="balance-card"><div class="card-top"><span>In allocazione</span><span class="mini-icon">◈</span></div><div class="amount"><strong id="staked">—</strong><small>DEMO</small></div><div class="card-foot"><span>Strategie dimostrative</span><span class="muted">Nessun validator</span></div></article>
+        <article class="balance-card"><div class="card-top"><span>Ricompense</span><span class="mini-icon gold">✳</span></div><div class="amount"><strong>0</strong><small>DEMO</small></div><div class="card-foot"><span>Non simulate in v0.2</span><span class="muted">Nessun APY</span></div></article>
+      </div>
+    </section>
+
+    <section class="actions-layout">
+      <div class="action-panel">
+        <div class="section-heading"><div><span class="kicker">02 / MOVIMENTI</span><h2>Prova il flusso</h2></div><span class="demo-pill">UNITÀ FITTIZIE</span></div>
+        <p class="panel-copy">Le operazioni aggiornano un registro locale nel browser. Puoi osservare il flusso senza collegare un wallet.</p>
+        <div class="action-tabs" role="tablist" aria-label="Tipo di operazione">
+          <button class="tab active" data-action="deposit" role="tab" aria-selected="true">Deposita</button>
+          <button class="tab" data-action="withdraw" role="tab" aria-selected="false">Preleva</button>
+          <button class="tab" data-action="stake" role="tab" aria-selected="false">Alloca</button>
+          <button class="tab" data-action="unstake" role="tab" aria-selected="false">Rientra</button>
         </div>
+        <form id="actionForm">
+          <label for="amount">Importo <span>in DEMO</span></label>
+          <div class="amount-input"><input id="amount" name="amount" type="number" min="1" max="1000000000" step="1" placeholder="0" required><button type="button" id="maxButton">MAX</button></div>
+          <div class="fee-line"><span>Commissione dimostrativa</span><b id="fee">0 DEMO</b></div>
+          <button class="submit" type="submit" id="submitButton">Simula deposito <span>→</span></button>
+          <p class="form-message" id="formMessage" aria-live="polite"></p>
+        </form>
+        <div class="guardrail"><span>⌁</span><p><b>Nessun rendimento promesso o simulato.</b> La v0.2 non applica tassi, non genera ricompense e non invia transazioni.</p></div>
+      </div>
+      <aside class="strategy-panel">
+        <div class="section-heading"><div><span class="kicker">03 / STRATEGIE</span><h2>In valutazione</h2></div><span class="lock">⌑</span></div>
+        <p class="panel-copy">La rete e i protocolli saranno scelti solo dopo una valutazione indipendente.</p>
+        <article class="strategy-card"><div class="strategy-logo">V</div><div class="strategy-info"><b>Staking nativo</b><span>Validator da selezionare</span></div><span class="status">NON ATTIVO</span><div class="strategy-meta"><span>Rendimento netto</span><b>Da verificare</b><span>Prelievi / sblocco</span><b>Da verificare</b></div></article>
+        <article class="strategy-card"><div class="strategy-logo blue">↗</div><div class="strategy-info"><b>Altre strategie</b><span>Lending, liquid staking…</span></div><span class="status">NON ATTIVE</span><div class="strategy-meta"><span>Protocollo</span><b>Nessuno selezionato</b><span>Rischi e liquidità</span><b>Da analizzare</b></div></article>
+        <div class="strategy-note">Prima di attivare fondi reali: codice verificabile, indirizzi ufficiali, condizioni di uscita, commissioni e rischi documentati.</div>
       </aside>
+    </section>
 
-      <main class="content-area">
-        <div class="welcome-row">
-          <div>
-            <div class="eyebrow"><span class="pulse"></span> VLT · DIGITAL ASSETS</div>
-            <h1 id="pageTitle">Exchange</h1>
-            <p>Mercati, strumenti e asset on-chain in un’unica interfaccia.</p>
-          </div>
-          <div class="account-chip"><span class="avatar">A</span><span><small>ACCOUNT</small><b id="walletAddress">—</b></span></div>
-          <span id="connectionBadge" hidden>COLLEGATO</span><span id="verified" hidden></span><span id="readStatus" hidden></span>
-        </div>
+    <section class="ledger-section">
+      <div class="section-heading"><div><span class="kicker">04 / PROVE</span><h2>Registro delle operazioni</h2><p class="panel-copy">Ogni voce include l’hash dell’evento e quello precedente. Le modifiche retroattive rompono la verifica della catena.</p></div><div class="verified" id="verified"><span></span> Verifica in corso</div></div>
+      <div class="ledger-wrap"><table><thead><tr><th>OPERAZIONE</th><th>ORA</th><th>IMPORTO</th><th>COMMISSIONE</th><th>HASH EVENTO</th></tr></thead><tbody id="ledger"><tr><td colspan="5" class="empty">Caricamento del registro…</td></tr></tbody></table></div>
+      <div class="ledger-foot"><span><i class="dot"></i> Registro hash-chain locale</span><span id="eventCount">— eventi</span><span class="hash-note">Integrità rilevata dal browser</span></div>
+    </section>
 
-        <section class="view active" id="view-exchange">
-          <section class="portfolio-hero">
-            <div class="portfolio-hero-copy">
-              <span class="overline">IL TUO WALLET · SOLANA</span>
-              <h2>Panoramica<br><em>del portafoglio.</em></h2>
-              <p>Saldi verificati direttamente su Solana mainnet.</p>
-              <div class="portfolio-metrics">
-                <div><small>SOL DISPONIBILI</small><strong id="solBalanceDisplay">—</strong></div>
-                <div><small>ASSET RILEVATI</small><strong id="assetCount">—</strong></div>
-              </div>
-            </div>
-            <div class="vault-art" aria-hidden="true"><div class="vault-ring ring-outer"></div><div class="vault-ring ring-inner"></div><div class="vault-orb">ϟ</div><span>VLT / 01</span></div>
-            <div class="hero-network"><i></i> LETTURA ON-CHAIN</div>
-          </section>
-
-          <div class="section-heading">
-            <div><span class="overline">MARKET</span><h2>Mercati</h2></div>
-            <div class="market-source"><span class="source-dot"></span><span>OKX · dati pubblici</span><small id="marketUpdated">Aggiornamento in attesa</small></div>
-          </div>
-          <section class="market-panel">
-            <div class="market-table-wrap">
-              <table class="market-table">
-                <thead><tr><th>ASSET</th><th>PREZZO</th><th>24H</th><th>MASSIMO 24H</th><th>VOLUME 24H</th><th></th></tr></thead>
-                <tbody id="marketTableBody"><tr><td colspan="6" class="market-loading"><span class="loader-dot"></span> Carico i prezzi spot da OKX…</td></tr></tbody>
-              </table>
-            </div>
-            <p class="market-footnote">Prezzi spot pubblici OKX in USDT. $ARKV viene mostrato nel wallet on-chain; non è quotato in questo feed.</p>
-          </section>
-
-          <div class="exchange-grid">
-            <section class="panel-card assets-card">
-              <div class="panel-heading">
-                <div><span class="overline">ASSET ON-CHAIN</span><h2>Il tuo portafoglio</h2></div>
-                <span class="live-dot"><i></i> MAINNET</span>
-              </div>
-              <div class="asset-table-labels"><span>ASSET / MINT</span><span>SALDO</span></div>
-              <div class="asset-list" id="assetListExchange" aria-live="polite"><p class="portfolio-note">Attendo i saldi on-chain…</p></div>
-              <div class="asset-card-footer"><p class="portfolio-note" id="walletMessage">Lettura saldo in corso…</p><button class="text-button refresh-button" id="refreshWallet">Aggiorna ↻</button></div>
-            </section>
-
-            <section class="panel-card trade-card">
-              <div class="panel-heading"><div><span class="overline">VLT EXCHANGE</span><h2>Scambia asset</h2></div><span class="soon-pill">IN PREPARAZIONE</span></div>
-              <div class="trade-preview-icon">⇅</div>
-              <p class="trade-intro">L’interfaccia di trading si collegherà a un provider di liquidità verificato.</p>
-              <div class="trade-row"><span>Paghi</span><b>Seleziona un asset <i>⌄</i></b></div>
-              <div class="trade-row"><span>Ricevi</span><b>Seleziona un asset <i>⌄</i></b></div>
-              <button class="trade-disabled" disabled>Trading non ancora attivo <span>↗</span></button>
-              <small class="trade-caption">Nessuna transazione verrà inviata da questa preview.</small>
-            </section>
-          </div>
-        </section>
-
-        <section class="view" id="view-web3">
-          <div class="wallet-heading-card">
-            <div><span class="overline">VLT WALLET · SELF-CUSTODY</span><h2>Il tuo wallet,<br><em>la tua scelta.</em></h2><p>Visualizza gli asset del wallet collegato e usa le dApp Web3 da un solo spazio.</p></div>
-            <div class="wallet-heading-mark">ϟ<span>VLT WALLET</span></div>
-          </div>
-          <div class="wallet-stats-grid">
-            <article class="stat-card"><span class="stat-icon sol">◎</span><small>SALDO SOL</small><strong id="solBalanceWallet">—</strong><span>Solana Mainnet</span></article>
-            <article class="stat-card"><span class="stat-icon">◈</span><small>ASSET RILEVATI</small><strong id="assetCountWallet">—</strong><span>Token con saldo on-chain</span></article>
-            <article class="stat-card"><span class="stat-icon secure">✓</span><small>MODALITÀ</small><strong>Sola lettura</strong><span>Nessuna chiave custodita</span></article>
-          </div>
-          <div class="wallet-page-grid">
-            <section class="panel-card assets-card">
-              <div class="panel-heading"><div><span class="overline">ON-CHAIN · SOLANA</span><h2>I tuoi asset</h2></div><button class="text-button refresh-button" id="refreshWalletPage">Aggiorna ↻</button></div>
-              <div class="asset-table-labels"><span>ASSET / MINT</span><span>SALDO</span></div>
-              <div class="asset-list" id="assetListWallet" aria-live="polite"><p class="portfolio-note">Attendo i saldi on-chain…</p></div>
-              <p class="portfolio-note" id="walletStatusWallet">I saldi sono letti direttamente da Solana mainnet.</p>
-            </section>
-            <aside class="wallet-info-column">
-              <section class="wallet-info-card"><span class="info-icon">⌘</span><span class="overline">WEB3 EXPERIENCE</span><h3>Un accesso, più possibilità.</h3><p>Collega applicazioni decentralizzate e protocolli dalla tua esperienza VLT.</p><span class="coming-label">CONNETTORI WEB3 IN ARRIVO</span></section>
-              <section class="security-card"><span class="security-check">✓</span><div><b>Il wallet resta tuo</b><p>VLT non vede né conserva la tua chiave privata. La connessione è gestita dal provider del wallet.</p></div></section>
-            </aside>
-          </div>
-        </section>
-
-        <footer class="vault-footer"><span>VLT · AV01.000 · ATLAS VALLEY</span><span>Wallet read-only · Produced by pantheraleo.atlasvalley</span><a href="protocol.md" target="_blank" rel="noreferrer">Stato integrazioni ↗</a></footer>
-      </main>
-    </div>
-  </div>
-
-  <script src="resources/js/config.js" defer></script>
-  <script src="resources/js/solana-rpc.js" defer></script>
-  <script src="resources/js/vault-ui.js" defer></script>
-  <script src="resources/js/wallet-assets.js" defer></script>
-  <script src="resources/js/market-data.js" defer></script>
-  <script src="resources/js/main.js" defer></script>
+    <footer><a class="footer-brand" href="#top">ATLAS VALLEY <span>YIELD LAB V0.2</span></a><p>Prototipo educativo · Unità DEMO · Non è un servizio finanziario o un protocollo on-chain.</p><a href="/atlaslabs/protocol.md" target="_blank" rel="noreferrer">Specifica del protocollo ↗</a></footer>
+  </main>
+  <script src="/atlaslabs/lab.js" defer></script>
 </body>
 </html>

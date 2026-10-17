@@ -1,13 +1,26 @@
-# atlas-vault-AV01.000 — v0.2.4
+# Atlas Valley Yield Lab — v0.2
 
-## Stato
-- Login: connessione diretta all’estensione Phantom. Il collegamento non è autenticazione server-side con firma.
-- Saldo SOL e token SPL/Token-2022: lettura RPC Solana mainnet in sola lettura con commitment finalized. Le quantità e lo slot provengono dalla risposta RPC; token account multipli per lo stesso mint sono aggregati.
-- ARKV: riconosciuto con il mint fornito dall’utente ([Solscan](https://solscan.io/token/ABC64226vR9kHtjtYCDENostEbCFdtXYvY4o6Gwzpump)); mostrato come zero quando non c’è un token account con saldo.
-- Mercati: ticker spot pubblici OKX letti dal browser, senza API key.
-- Swap, depositi, prelievi, staking ed esecuzione di transazioni: non implementati.
-- DeFi e dApp: layout esplorativo, integrazioni da valutare.
+**Stato: simulazione client-side.** Il portafoglio, le unità `DEMO` e gli eventi restano nel `localStorage` del browser. Non vengono inviati ad alcun server o blockchain. `DEMO` non ha valore e non rappresenta un token.
 
-La UI non deve essere presentata come exchange operativo né come promessa di rendimento.
+## Regole contabili
 
-Il client richiede direttamente a Solana RPC SOL nativo e saldi positivi dai programmi SPL Token e Token-2022. Per mint sconosciuti mostra il mint integrale invece di inventare simbolo o nome. La UI aggiorna automaticamente i saldi ogni 30 secondi e permette l’aggiornamento manuale. Non è presente un backend applicativo né un database.
+- `deposit(amount)`: accredita unità DEMO create solo per la simulazione.
+- `withdraw(amount)`: riduce il saldo disponibile nella simulazione.
+- `stake(amount)`: sposta unità DEMO dal saldo disponibile al saldo allocato.
+- `unstake(amount)`: sposta unità DEMO dall'allocazione al saldo disponibile.
+- Le commissioni sono zero; APY e ricompense non sono calcolati né simulati.
+- Gli importi sono interi positivi fino a 1.000.000.000 DEMO; movimenti oltre il saldo sono rifiutati.
+
+## Registro hash-chain
+
+Gli eventi vengono ordinati in una catena SHA-256. Ogni hash copre i campi `sequence`, `created_at`, `kind`, `amount`, `fee`, `note` e `previous_hash`, codificati come JSON UTF-8 con chiavi ordinate alfabeticamente e separatori compatti. Il primo evento punta a 64 zeri. Il browser ricostruisce ogni hash e controlla sequenze e collegamenti prima di abilitare nuove operazioni.
+
+La verifica rileva modifiche al registro che non aggiornino correttamente l'intera catena. Non è una prova pubblica né un ancoraggio blockchain: il proprietario del browser può modificare o cancellare `localStorage` e ricalcolare gli hash. I dati sono specifici di quel browser e non sono sincronizzati.
+
+## WalletConnect e limiti di autenticazione
+
+Il percorso di login v0.2 è predisposto, ma il collegamento reale è disattivato finché non sono configurati un Project ID Reown e una rete per la sessione. La pagina non dichiara un utente autenticato, non chiede firme e non autorizza transazioni. Un'autenticazione di produzione richiede anche un servizio server-side che emetta nonce monouso, verifichi le firme e gestisca le sessioni.
+
+## Fondi reali non supportati
+
+Non esistono contratti, validatori o provider di rendimento selezionati. Nessun rendimento è garantito. Prima di qualunque uso reale servono due diligence dei protocolli, selezione delle reti, verifica indipendente del codice, analisi dei rischi, revisione legale e un'architettura server autenticata.

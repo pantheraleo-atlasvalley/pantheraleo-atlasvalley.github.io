@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#08120d">
+  <meta name="description" content="Atlas Valley Yield Lab v0.2 — accesso wallet e prototipo trasparente.">
+  <title>Wallet Login — Atlas Valley Yield Lab v0.2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/atlaslabs/app.css">
+</head>
+<body>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+  <header class="topbar"><a class="brand" href="/" aria-label="Atlas Valley homepage"><span class="brand-mark">ϟ</span><span><b>ATLAS VALLEY</b><small>YIELD LAB / V0.2</small></span></a><div class="top-actions"><a class="back-link" href="/">← Sito Atlas Valley</a><span class="version-pill"><i></i> PROTOTIPO</span></div></header>
+  <main class="shell">
+    <section class="login-layout">
+      <div class="story">
+        <div class="eyebrow"><span class="pulse"></span> ACCESSO WEB3 · VERSIONE 0.2</div>
+        <h1>Il tuo wallet.<br><em>Le tue chiavi.</em></h1>
+        <p class="lead">Un primo accesso wallet per il laboratorio Atlas Valley. La connessione identifica l’indirizzo pubblico; non cede il controllo dei fondi.</p>
+        <div class="value-list"><div><span class="check">✓</span><span><b>Non custodial</b><small>La seed phrase non viene mai richiesta.</small></span></div><div><span class="check">✓</span><span><b>Firma esplicita</b><small>Ogni firma deve essere approvata nel wallet.</small></span></div><div><span class="check">✓</span><span><b>Trasparenza prima dei fondi</b><small>Nessun deposito o rendimento è attivo in questa versione.</small></span></div></div>
+        <div class="system-note"><span>ⓘ</span><p><b>V0.2 è un prototipo di accesso.</b> La connessione WalletConnect verrà attivata dopo la configurazione di un Project ID Reown e delle reti ammesse. Il login non autorizza transazioni e non è ancora un’identità verificata dal server.</p></div>
+      </div>
+      <section class="login-card" aria-labelledby="loginTitle">
+        <div class="card-orbit orbit-1"></div><div class="card-orbit orbit-2"></div><div class="card-mark">ϟ</div>
+        <div class="card-body"><div class="card-kicker">ATLAS LABS <span>·</span> WALLET ACCESS</div><h2 id="loginTitle">Accedi al laboratorio</h2><p class="card-subtitle">Connetti il wallet per iniziare. Nessun fondo verrà spostato.</p>
+          <div class="wallet-preview"><div class="wallet-symbol">⌘</div><div><b>WalletConnect</b><small>QR code o wallet mobile compatibile</small></div><span class="connect-state" id="connectState">NON CONFIGURATO</span></div>
+          <button class="connect-button" id="connectButton" type="button"><span class="wc-mark">◉</span><span id="connectLabel">Configura WalletConnect</span><span class="button-arrow">→</span></button>
+          <p class="feedback" id="feedback" role="status" aria-live="polite">Per la connessione live manca il Project ID Reown e la rete di autenticazione.</p>
+          <div class="divider"><span>PROTEZIONE</span></div>
+          <div class="security-row"><span class="security-icon">⌑</span><p><b>Il sito non chiede mai la frase di recupero.</b><br>Non firmare messaggi che non riconosci e verifica sempre il dominio prima di autorizzare richieste nel wallet.</p></div>
+          <div class="card-footer"><span>STATO RETE <b>NON SELEZIONATA</b></span><span>FONDI REALI <b>DISATTIVI</b></span></div>
+        </div>
+      </section>
+    </section>
+    <section class="below-grid"><article class="status-card"><div class="status-icon">◈</div><div><span class="eyebrow">01 / CONNESSIONE</span><h3>WalletConnect</h3><p>Modalità di connessione in preparazione. La v0.2 non invia richieste di firma né transazioni.</p></div><span class="badge pending">IN CONFIGURAZIONE</span></article><article class="status-card"><div class="status-icon gold">✳</div><div><span class="eyebrow">02 / PROTOCOLLO</span><h3>Rendimenti</h3><p>Validator, rete, commissioni e strategie sono ancora da valutare. Non mostriamo APY o rendite stimate.</p></div><span class="badge off">NON ATTIVI</span></article></section>
+    <footer><a class="footer-brand" href="/">ATLAS VALLEY <span>YIELD LAB V0.2</span></a><span>Prototype · no real funds · no yield claims</span><a href="/atlaslabs/">V0.2 overview ↗</a></footer>
+  </main>
+  <script src="/atlaslabs/config.js"></script><script src="/atlaslabs/login.js" defer></script>
+</body></html>
