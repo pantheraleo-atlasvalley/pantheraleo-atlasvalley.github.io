@@ -1,68 +1,77 @@
 <!doctype html>
 <html lang="it">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#07110c"><meta name="description" content="Prototipo locale di trasparenza per staking e rendimenti: simulazione, nessun asset reale.">
-  <title>Yield Lab v0.1 — Atlas Valley</title><link rel="stylesheet" href="/atlaslabs/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07110c">
+  <meta name="description" content="Atlas Valley Yield Lab v0.1.1 — connessione Phantom e lettura dei saldi Solana on-chain.">
+  <title>Yield Lab v0.1.1 — Atlas Valley</title>
+  <link rel="stylesheet" href="/atlaslabs/style.css">
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="#top" aria-label="Atlas Valley Yield Lab"><span class="brand-mark">ϟ</span><span><b>ATLAS VALLEY</b><small>YIELD LAB / V0.1</small></span></a>
-    <div class="top-right"><span class="network"><i></i> AMBIENTE DEMO</span><span class="mode-tag">SIMULAZIONE</span></div>
-  </header>
-  <main id="top">
-    <section class="intro">
-      <div><div class="eyebrow"><span class="pulse"></span> PROTOTIPO TRASPARENTE · FASE 01</div>
-        <h1>Il rendimento,<br><em>senza scatole nere.</em></h1>
-        <p class="lead">Un laboratorio locale per esplorare deposito, allocazione e prelievo, con ogni passaggio nel registro verificabile.</p>
-      </div>
-      <aside class="reality-card"><span class="reality-icon">ⓘ</span><div><b>Qui non si muovono criptovalute</b><p>Questa v0.1 simula i flussi usando unità DEMO nel browser. Non collega wallet, blockchain, validator o protocolli di rendita.</p></div></aside>
-    </section>
-
-    <section class="portfolio" aria-labelledby="portfolio-title">
-      <div class="section-heading"><div><span class="kicker">01 / POSIZIONE</span><h2 id="portfolio-title">Panoramica del portafoglio</h2></div><span class="sync"><i></i> Registro aggiornato</span></div>
-      <div class="balance-grid">
-        <article class="balance-card main-balance"><div class="card-top"><span>Disponibile</span><span class="coin">D</span></div><div class="amount"><strong id="available">—</strong><small>DEMO</small></div><div class="card-foot"><span>Pronto per una simulazione</span><span class="up">↗</span></div></article>
-        <article class="balance-card"><div class="card-top"><span>In allocazione</span><span class="mini-icon">◈</span></div><div class="amount"><strong id="staked">—</strong><small>DEMO</small></div><div class="card-foot"><span>Strategie dimostrative</span><span class="muted">Nessun validator</span></div></article>
-        <article class="balance-card"><div class="card-top"><span>Ricompense</span><span class="mini-icon gold">✳</span></div><div class="amount"><strong>0</strong><small>DEMO</small></div><div class="card-foot"><span>Non simulate in v0.1</span><span class="muted">Nessun APY</span></div></article>
-      </div>
-    </section>
-
-    <section class="actions-layout">
-      <div class="action-panel">
-        <div class="section-heading"><div><span class="kicker">02 / MOVIMENTI</span><h2>Prova il flusso</h2></div><span class="demo-pill">UNITÀ FITTIZIE</span></div>
-        <p class="panel-copy">Le operazioni aggiornano un registro locale nel browser. Puoi osservare il flusso senza collegare un wallet.</p>
-        <div class="action-tabs" role="tablist" aria-label="Tipo di operazione">
-          <button class="tab active" data-action="deposit" role="tab" aria-selected="true">Deposita</button>
-          <button class="tab" data-action="withdraw" role="tab" aria-selected="false">Preleva</button>
-          <button class="tab" data-action="stake" role="tab" aria-selected="false">Alloca</button>
-          <button class="tab" data-action="unstake" role="tab" aria-selected="false">Rientra</button>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar" id="top">
+    <a class="brand" href="#top" aria-label="Atlas Valley Yield Lab"><span class="brand-mark">ϟ</span><span><b>ATLAS VALLEY</b><small>YIELD LAB / V0.1.1</small></span></a>
+    <div class="top-right">
+      <div class="network"><i></i><span>SOLANA MAINNET</span></div>
+      <div class="wallet-menu" id="walletMenu">
+        <button class="wallet-button" id="walletButton" type="button" aria-haspopup="true" aria-expanded="false"><span class="wallet-button-icon">◉</span><span id="walletButtonText">CONNETTI PHANTOM</span><span class="chevron">⌄</span></button>
+        <div class="dropdown" id="walletDropdown" hidden>
+          <div class="dropdown-heading">WALLET SOLANA</div>
+          <div class="dropdown-address" id="dropdownAddress">Non connesso</div>
+          <button type="button" id="refreshButton">↻ <span>Aggiorna saldi</span></button>
+          <button type="button" id="disconnectButton" class="disconnect" hidden>↗ <span>Disconnetti wallet</span></button>
         </div>
-        <form id="actionForm">
-          <label for="amount">Importo <span>in DEMO</span></label>
-          <div class="amount-input"><input id="amount" name="amount" type="number" min="1" max="1000000000" step="1" placeholder="0" required><button type="button" id="maxButton">MAX</button></div>
-          <div class="fee-line"><span>Commissione dimostrativa</span><b id="fee">0 DEMO</b></div>
-          <button class="submit" type="submit" id="submitButton">Simula deposito <span>→</span></button>
-          <p class="form-message" id="formMessage" aria-live="polite"></p>
-        </form>
-        <div class="guardrail"><span>⌁</span><p><b>Nessun rendimento promesso o simulato.</b> La v0.1 non applica tassi, non genera ricompense e non invia transazioni.</p></div>
       </div>
-      <aside class="strategy-panel">
-        <div class="section-heading"><div><span class="kicker">03 / STRATEGIE</span><h2>In valutazione</h2></div><span class="lock">⌑</span></div>
-        <p class="panel-copy">La rete e i protocolli saranno scelti solo dopo una valutazione indipendente.</p>
-        <article class="strategy-card"><div class="strategy-logo">V</div><div class="strategy-info"><b>Staking nativo</b><span>Validator da selezionare</span></div><span class="status">NON ATTIVO</span><div class="strategy-meta"><span>Rendimento netto</span><b>Da verificare</b><span>Prelievi / sblocco</span><b>Da verificare</b></div></article>
-        <article class="strategy-card"><div class="strategy-logo blue">↗</div><div class="strategy-info"><b>Altre strategie</b><span>Lending, liquid staking…</span></div><span class="status">NON ATTIVE</span><div class="strategy-meta"><span>Protocollo</span><b>Nessuno selezionato</b><span>Rischi e liquidità</span><b>Da analizzare</b></div></article>
-        <div class="strategy-note">Prima di attivare fondi reali: codice verificabile, indirizzi ufficiali, condizioni di uscita, commissioni e rischi documentati.</div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="pulse"></span> ATLAS VALLEY <span class="eyebrow-sep">/</span> WALLET VIEW</div>
+        <h1>I tuoi asset,<br><em>in chiaro.</em></h1>
+        <p class="lead">Collega Phantom per leggere SOL e i token presenti nel tuo wallet Solana. I dati arrivano dalla mainnet.</p>
+        <div class="hero-meta"><span><i class="tiny-dot"></i> Lettura on-chain</span><span>·</span><span>Nessuna chiave privata richiesta</span></div>
+      </div>
+      <aside class="connect-card glass" id="connectCard">
+        <div class="connect-orbit"><span>ϟ</span><i></i><i></i><i></i></div>
+        <div class="card-kicker">CONNESSIONE WALLET</div>
+        <h2 id="connectTitle">Il tuo wallet,<br>senza passaggi superflui.</h2>
+        <p id="connectDescription">Autorizza Phantom a condividere il tuo indirizzo pubblico. Non serve firmare messaggi.</p>
+        <button class="primary-button" id="connectButton" type="button"><span>Collega Phantom</span><b>↗</b></button>
+        <div class="security-line"><span>◇</span> Connessione pubblica · nessuna transazione</div>
+        <p class="connect-message" id="connectMessage" aria-live="polite"></p>
       </aside>
     </section>
 
-    <section class="ledger-section">
-      <div class="section-heading"><div><span class="kicker">04 / PROVE</span><h2>Registro delle operazioni</h2><p class="panel-copy">Ogni voce include l’hash dell’evento e quello precedente. Le modifiche retroattive rompono la verifica della catena.</p></div><div class="verified" id="verified"><span></span> Verifica in corso</div></div>
-      <div class="ledger-wrap"><table><thead><tr><th>OPERAZIONE</th><th>ORA</th><th>IMPORTO</th><th>COMMISSIONE</th><th>HASH EVENTO</th></tr></thead><tbody id="ledger"><tr><td colspan="5" class="empty">Caricamento del registro…</td></tr></tbody></table></div>
-      <div class="ledger-foot"><span><i class="dot"></i> Registro hash-chain locale</span><span id="eventCount">— eventi</span><span class="hash-note">Integrità rilevata dal browser</span></div>
+    <section class="portfolio" aria-labelledby="portfolioTitle">
+      <div class="section-heading">
+        <div><span class="kicker">01 / PORTAFOGLIO</span><h2 id="portfolioTitle">Asset on-chain</h2><p id="portfolioDescription">Connetti Phantom per caricare i saldi aggiornati.</p></div>
+        <div class="live-status" id="liveStatus"><span></span><b>WALLET NON CONNESSO</b></div>
+      </div>
+      <div class="portfolio-overview glass">
+        <div class="overview-label">SALDO SOLANA</div>
+        <div class="overview-value"><strong id="solBalance">—</strong><span>SOL</span></div>
+        <div class="overview-foot"><span id="walletAddress">Indirizzo wallet in attesa</span><a id="explorerLink" href="https://solscan.io" target="_blank" rel="noreferrer" hidden>Apri su Solscan ↗</a></div>
+        <div class="overview-glow"></div>
+      </div>
+      <div class="assets-panel glass">
+        <div class="assets-heading"><div><span class="kicker">TOKEN SPL</span><h3>I tuoi token</h3></div><span class="asset-count" id="assetCount">— asset</span></div>
+        <div id="assetList" class="asset-list"><div class="empty-state"><span class="empty-orb">◎</span><b>Il portafoglio apparirà qui</b><span>Collega Phantom per leggere i token SPL.</span></div></div>
+        <div class="assets-foot"><span><i class="tiny-dot"></i> Solana mainnet-beta</span><span id="lastUpdated">Dati non ancora caricati</span></div>
+      </div>
     </section>
 
-    <footer><a class="footer-brand" href="#top">ATLAS VALLEY <span>YIELD LAB V0.1</span></a><p>Prototipo educativo · Non è un servizio finanziario o un protocollo on-chain.</p><a href="/atlaslabs/protocol.md" target="_blank" rel="noreferrer">Specifica del protocollo ↗</a></footer>
+    <section class="protocol-section">
+      <div class="section-heading"><div><span class="kicker">02 / YIELD LAB</span><h2>Strategie in valutazione</h2><p>Le funzioni di rendimento verranno presentate solo dopo la verifica di protocolli, rischi e condizioni di uscita.</p></div><span class="status-badge">RICERCA</span></div>
+      <div class="strategy-grid">
+        <article class="strategy-card glass"><div class="strategy-icon">◈</div><div><span class="strategy-tag">SOLANA</span><h3>Staking nativo</h3><p>Validator e condizioni di unstake da selezionare e verificare.</p></div><span class="strategy-state">IN ANALISI</span></article>
+        <article class="strategy-card glass"><div class="strategy-icon violet">✳</div><div><span class="strategy-tag">DEFI</span><h3>Altre strategie</h3><p>Protocolli, liquidità e rischi da documentare prima di ogni integrazione.</p></div><span class="strategy-state">IN ANALISI</span></article>
+      </div>
+    </section>
+
+    <footer><a class="footer-brand" href="#top">ATLAS VALLEY <span>YIELD LAB V0.1.1</span></a><p>Wallet non custodial · saldo letto dalla rete · nessuna transazione inviata</p><a href="/atlaslabs/protocol.md" target="_blank" rel="noreferrer">Protocollo ↗</a></footer>
   </main>
   <script src="/atlaslabs/app.js" defer></script>
 </body>

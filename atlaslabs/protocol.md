@@ -1,32 +1,25 @@
-# Atlas Valley Yield Lab — protocollo dimostrativo v0.1
+# Atlas Valley Yield Lab — note di versione v0.1.1
 
-**Stato: prototipo locale, solo simulazione. Nessun contratto on-chain, wallet, custodia, staking, validator, rendimento o transazione reale è implementato.** Le unità `DEMO` non hanno valore, non sono convertibili e non rappresentano un token.
+**Modalità attiva: connessione Phantom e lettura pubblica di saldi Solana.** L'app non invia transazioni e non richiede firme.
 
-## Obiettivo
+## Connessione e dati
 
-Rendere ispezionabili le regole contabili e il flusso utente prima di scegliere una rete o un protocollo esterno. Questa versione non propone un prodotto finanziario e non stima rendimenti.
+- Phantom viene rilevato dal provider iniettato nel browser. La connessione chiede il permesso di leggere l'indirizzo pubblico.
+- Il saldo SOL è letto con il metodo RPC `getBalance`.
+- I token vengono letti con `getTokenAccountsByOwner`, usando `jsonParsed`, per il programma SPL Token e Token-2022.
+- I dati vengono richiesti direttamente dal browser al nodo RPC pubblico di Solana mainnet-beta. L'indirizzo pubblico viene inviato al nodo per la richiesta dei saldi.
+- Le quantità sono on-chain. Questa versione non recupera prezzi, non stima un valore in valuta e non mostra metadati token non verificati. I token sconosciuti sono identificati dal mint.
+- Il mint `ABC64226vR9kHtjtYCDENostEbCFdtXYvY4o6Gwzpump` viene etichettato `$ARKV`; il nome deriva dalla configurazione locale e non costituisce verifica dell'autenticità del token.
 
-## Regole contabili
+## Limiti e sicurezza
 
-- `deposit(amount)`: accredita `amount` unità DEMO al saldo disponibile.
-- `withdraw(amount)`: addebita il saldo disponibile.
-- `stake(amount)`: sposta unità dal saldo disponibile al saldo in allocazione dimostrativa.
-- `unstake(amount)`: sposta unità dall'allocazione dimostrativa al saldo disponibile.
-- Commissioni: 0 punti base nel prototipo; nessuna commissione di rete è simulata.
-- Ricompense e APY: non calcolati e non accreditati.
-- Importi: interi positivi, massimo 1.000.000.000 DEMO per operazione.
-- Un prelievo o un rientro superiore al relativo saldo è rifiutato.
+- La connessione non consegna chiavi private e il codice non chiama metodi di firma o invio transazioni.
+- Non sono implementati deposito, prelievo, staking o rendimenti reali. Le strategie sono informative e non attive.
+- Il nodo RPC pubblico può applicare limiti, essere temporaneamente indisponibile o fornire dati con ritardo. La UI mostra gli errori di lettura e permette di aggiornare i saldi.
+- Il sito non riceve l'indirizzo da un proprio backend; le richieste RPC dal browser sono necessarie per leggere la chain.
 
-## Registro verificabile
+## Riferimenti tecnici
 
-Il browser conserva un evento per operazione nel `localStorage`. Per ogni evento `n`, il digest è SHA-256 della codifica JSON UTF-8 canonica con chiavi ordinate e separatori compatti dei campi `sequence`, `created_at`, `kind`, `amount`, `fee`, `note` e `previous_hash`. `previous_hash` punta al digest dell'evento precedente; il primo evento usa 64 zeri. Il browser ricalcola i digest e verifica sequenza e collegamenti. Questa catena rileva modifiche che non ricalcolano correttamente gli hash, ma non è un ancoraggio pubblico né una prova indipendente: chi controlla il browser può cancellare il registro o ricalcolare l'intera catena.
-
-## Cosa manca prima di fondi reali
-
-1. Selezione di rete, asset, wallet e modello non-custodial.
-2. Ricerca e due diligence indipendenti di protocolli, validator, rischi, liquidità, sblocco, slashing e commissioni.
-3. Contratti o integrazioni con sorgenti dati verificabili, limiti e condizioni di uscita.
-4. Modello di minaccia, revisione di sicurezza indipendente, monitoraggio e piano di risposta agli incidenti.
-5. Revisione legale, fiscale e di conformità nelle giurisdizioni interessate.
-
-Nessun rendimento è garantito. Staking, lending e altri strumenti possono comportare perdita del capitale, slashing, vulnerabilità, illiquidità, rischio di controparte, volatilità e commissioni.
+- [Phantom: stabilire una connessione](https://docs.phantom.com/solana/establishing-a-connection)
+- [Solana RPC: getBalance](https://solana.com/docs/rpc/http/getbalance)
+- [Solana RPC: getTokenAccountsByOwner](https://solana.com/docs/rpc/http/gettokenaccountsbyowner)
