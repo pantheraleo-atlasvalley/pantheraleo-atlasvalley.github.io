@@ -107,14 +107,15 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/health":
             self.send_json(200, {"ok": True, "service": "atlas-yield-rpc", "configured": bool(API_KEY)})
             return
-        if path in {"/", "/atlaslabs", "/atlaslabs/"}:
+        if path in {"/", "/atlaslabs"}:
             self.send_response(302)
             self.send_header("Location", "/atlaslabs/")
             self.send_header("Cache-Control", "no-store")
             self.end_headers()
             return
         if path.startswith("/atlaslabs/"):
-            self.serve_static(path.removeprefix("/atlaslabs/") or "index.html")
+            relative = path.removeprefix("/atlaslabs/") or "index.html"
+            self.serve_static(relative)
             return
         self.send_error(404)
 
