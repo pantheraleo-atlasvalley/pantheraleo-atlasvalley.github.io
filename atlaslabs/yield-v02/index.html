@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#07110c"><meta name="description" content="Atlas Valley Yield Lab v0.2 — simulatore locale trasparente, login wallet in preparazione.">
+  <title>Yield Lab v0.2 — Atlas Valley</title><link rel="stylesheet" href="/atlaslabs/dashboard.css"><link rel="stylesheet" href="/atlaslabs/dashboard-v02.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Atlas Valley Yield Lab"><span class="brand-mark">ϟ</span><span><b>ATLAS VALLEY</b><small>YIELD LAB / V0.2</small></span></a>
+    <div class="top-right"><span class="network"><i></i> AMBIENTE DEMO</span><a class="mode-tag wallet-entry" href="/atlaslabs/">ACCEDI CON WALLET ↗</a></div>
+  </header>
+  <main id="top">
+    <section class="intro">
+      <div><div class="eyebrow"><span class="pulse"></span> PROTOTIPO TRASPARENTE · FASE 01</div>
+        <h1>Il rendimento,<br><em>senza scatole nere.</em></h1>
+        <p class="lead">Un laboratorio web per esplorare deposito, allocazione e prelievo simulati. Login wallet in preparazione; i passaggi demo restano trasparenti e verificabili nel browser.</p>
+      </div>
+      <aside class="reality-card"><span class="reality-icon">ⓘ</span><div><b>Qui non si muovono criptovalute</b><p>Questa v0.2 simula i flussi usando unità DEMO nel browser. Il wallet non è ancora collegato; non ci sono fondi, validator o rendimenti reali.</p></div></aside>
+    </section>
+
+    <section class="portfolio" aria-labelledby="portfolio-title">
+      <div class="section-heading"><div><span class="kicker">01 / POSIZIONE</span><h2 id="portfolio-title">Panoramica del portafoglio</h2></div><span class="sync"><i></i> Registro aggiornato</span></div>
+      <div class="balance-grid">
+        <article class="balance-card main-balance"><div class="card-top"><span>Disponibile</span><span class="coin">D</span></div><div class="amount"><strong id="available">—</strong><small>DEMO</small></div><div class="card-foot"><span>Pronto per una simulazione</span><span class="up">↗</span></div></article>
+        <article class="balance-card"><div class="card-top"><span>In allocazione</span><span class="mini-icon">◈</span></div><div class="amount"><strong id="staked">—</strong><small>DEMO</small></div><div class="card-foot"><span>Strategie dimostrative</span><span class="muted">Nessun validator</span></div></article>
+        <article class="balance-card"><div class="card-top"><span>Ricompense</span><span class="mini-icon gold">✳</span></div><div class="amount"><strong>0</strong><small>DEMO</small></div><div class="card-foot"><span>Non simulate in v0.2</span><span class="muted">Nessun APY</span></div></article>
+      </div>
+    </section>
+
+    <section class="actions-layout">
+      <div class="action-panel">
+        <div class="section-heading"><div><span class="kicker">02 / MOVIMENTI</span><h2>Prova il flusso</h2></div><span class="demo-pill">UNITÀ FITTIZIE</span></div>
+        <p class="panel-copy">Le operazioni aggiornano un registro locale nel browser. Puoi osservare il flusso senza collegare un wallet.</p>
+        <div class="action-tabs" role="tablist" aria-label="Tipo di operazione">
+          <button class="tab active" data-action="deposit" role="tab" aria-selected="true">Deposita</button>
+          <button class="tab" data-action="withdraw" role="tab" aria-selected="false">Preleva</button>
+          <button class="tab" data-action="stake" role="tab" aria-selected="false">Alloca</button>
+          <button class="tab" data-action="unstake" role="tab" aria-selected="false">Rientra</button>
+        </div>
+        <form id="actionForm">
+          <label for="amount">Importo <span>in DEMO</span></label>
+          <div class="amount-input"><input id="amount" name="amount" type="number" min="1" max="1000000000" step="1" placeholder="0" required><button type="button" id="maxButton">MAX</button></div>
+          <div class="fee-line"><span>Commissione dimostrativa</span><b id="fee">0 DEMO</b></div>
+          <button class="submit" type="submit" id="submitButton">Simula deposito <span>→</span></button>
+          <p class="form-message" id="formMessage" aria-live="polite"></p>
+        </form>
+        <div class="guardrail"><span>⌁</span><p><b>Nessun rendimento promesso o simulato.</b> La v0.2 non applica tassi, non genera ricompense e non invia transazioni.</p></div>
+      </div>
+      <aside class="strategy-panel">
+        <div class="section-heading"><div><span class="kicker">03 / STRATEGIE</span><h2>In valutazione</h2></div><span class="lock">⌑</span></div>
+        <p class="panel-copy">La rete e i protocolli saranno scelti solo dopo una valutazione indipendente.</p>
+        <article class="strategy-card"><div class="strategy-logo">V</div><div class="strategy-info"><b>Staking nativo</b><span>Validator da selezionare</span></div><span class="status">NON ATTIVO</span><div class="strategy-meta"><span>Rendimento netto</span><b>Da verificare</b><span>Prelievi / sblocco</span><b>Da verificare</b></div></article>
+        <article class="strategy-card"><div class="strategy-logo blue">↗</div><div class="strategy-info"><b>Altre strategie</b><span>Lending, liquid staking…</span></div><span class="status">NON ATTIVE</span><div class="strategy-meta"><span>Protocollo</span><b>Nessuno selezionato</b><span>Rischi e liquidità</span><b>Da analizzare</b></div></article>
+        <div class="strategy-note">Prima di attivare fondi reali: codice verificabile, indirizzi ufficiali, condizioni di uscita, commissioni e rischi documentati.</div>
+      </aside>
+    </section>
+
+    <section class="ledger-section">
+      <div class="section-heading"><div><span class="kicker">04 / PROVE</span><h2>Registro delle operazioni</h2><p class="panel-copy">Ogni voce include l’hash dell’evento e quello precedente. Le modifiche retroattive rompono la verifica della catena.</p></div><div class="verified" id="verified"><span></span> Verifica in corso</div></div>
+      <div class="ledger-wrap"><table><thead><tr><th>OPERAZIONE</th><th>ORA</th><th>IMPORTO</th><th>COMMISSIONE</th><th>HASH EVENTO</th></tr></thead><tbody id="ledger"><tr><td colspan="5" class="empty">Caricamento del registro…</td></tr></tbody></table></div>
+      <div class="ledger-foot"><span><i class="dot"></i> Registro hash-chain locale</span><span id="eventCount">— eventi</span><span class="hash-note">Integrità rilevata dal browser</span></div>
+    </section>
+
+    <footer><a class="footer-brand" href="#top">ATLAS VALLEY <span>YIELD LAB V0.2</span></a><p>Prototipo educativo · Unità DEMO · Non è un servizio finanziario o un protocollo on-chain.</p><a href="protocol.md" target="_blank" rel="noreferrer">Specifica del protocollo ↗</a></footer>
+  </main>
+  <script src="lab.js" defer></script>
+</body>
+</html>
